@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <script type="module">
+            import { generator } from './generator.js';
+            import { additionStacked, subtractionStacked } from './stacked.js';
+            import { randomInt } from './random.js';
+
+            const root = generator(24, () => {
+                const isSub = !!randomInt(0, 1);
+                if (isSub) {
+                    const first = randomInt(29, 5);
+                    const second = randomInt(1, first);
+                    return subtractionStacked(first, second);
+                } else {
+                    const sum = randomInt(1, 29);
+                    const addend1 = sum - randomInt(1, sum);
+                    const addend2 = sum - addend1;
+                    return additionStacked(addend1, addend2);
+                }
+            }).node();
+            document.body.appendChild(root);
+        </script>
+    </head>
+    <body></body>
+</html>
